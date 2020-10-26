@@ -112,18 +112,18 @@ namespace graphs
 		{
 			in.getline(buffer, sizeof(buffer), ':'); // read the integer before ":" 
 			node = stoi(buffer); 
-g.edges.insert(make_pair(node, neighbors)); // enter node into map
+			g.edges.insert(make_pair(node, neighbors)); // enter node into map
 
-in.get(); // jump over the space after ":" 
+			in.get(); // jump over the space after ":" 
 
-while (in.peek() != ';') // read the integers after ":" one by one until ";" 
-{
-	in.getline(buffer, sizeof(buffer), ' ');
-	if (g.edges[node].insert(stoi(buffer)).second) g.ecount++; // enter neighbors into map and increase ecount
-}
+			while (in.peek() != ';') // read the integers after ":" one by one until ";" 
+			{
+				in.getline(buffer, sizeof(buffer), ' ');
+				if (g.edges[node].insert(stoi(buffer)).second) g.ecount++; // enter neighbors into map and increase ecount
+			}
 
-in.get(); // jump over ";"
-in.get(); // jump over end of line character
+			in.get(); // jump over ";"
+			in.get(); // jump over end of line character
 		}
 
 		return in;
