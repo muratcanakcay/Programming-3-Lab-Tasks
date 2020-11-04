@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lab03_eng
+namespace Lab03
 {
     // abstract class can mix non implemented(abstract) methods and also implemented
     abstract class D2Shape
@@ -142,7 +142,44 @@ namespace Lab03_eng
     }
 
     // TODO: Need to implement
-    //class Circle : D2Shape
-    //{
-    //}
+    class Circle : D2Shape
+    {
+        protected double _r;
+        public Circle(double r)
+        {
+            _r = r;
+            
+            // here we accessing protected field from base class
+            Console.WriteLine($"Constructor Circle ({NumberOfCreatedObjects}) called");
+        }
+
+        protected override double CalculateArea()
+        {
+            return _r * _r * Math.PI;
+        }
+        public double CalculateCircuit()
+        {
+            return 2 * _r * Math.PI;
+        }
+
+        public override D2Shape Clone()
+        {
+            return new Circle(_r);
+        }
+
+        public override void Scale(double ratio)
+        {
+            _r *= ratio;            
+        }
+
+        public override string PrintShape()
+        {
+            return $"Area of Circle ({_r}) is = {CalculateArea()}";
+        }
+
+        ~Circle()
+        {
+            Console.WriteLine($"Finalizer Circle ({_objectNumber}) called");
+        }
+    }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lab03_eng
+namespace Lab03
 {
     class StudProgram
     {
@@ -54,20 +54,39 @@ namespace Lab03_eng
             GC.WaitForPendingFinalizers();
 
             PrintBreak();
-            
+
             //4. Students work - Circle
             // Go to Classes file and add Circle inheriting from D2Shape
             // Uncomment code below
-            //Circle c1 = new Circle(5);
-            //Console.WriteLine(c1.PrintShape());                         // Circle area (5) is =78,53981633974483
-            //Console.WriteLine(c1.CalculateCircuit());                   // 31,41592653589793
+            Circle c1 = new Circle(5);
+            Console.WriteLine(c1.PrintShape());                         // Circle area (5) is =78,53981633974483
+            Console.WriteLine(c1.CalculateCircuit());                   // 31,41592653589793
 
-            //D2Shape c2 = D2Shape.ScaleD2Shape(c1, 5);
-            //Console.WriteLine(c2.PrintShape());                         // Circle area (25) is =1963,4954084936207
-            //Console.WriteLine(c2.CalculateCircuit());                   // Not accessible for c2 -> why?
+            D2Shape c2 = D2Shape.ScaleD2Shape(c1, 5);
+            Console.WriteLine(c2.PrintShape());                         // Circle area (25) is =1963,4954084936207
+            // Console.WriteLine(c2.CalculateCircuit());                   // Not accessible for c2 -> why?
 
             Console.WriteLine("End of Main method");
             PrintBreak();
+
+
+            // Virtual hierarchy testing (from virtual.cs):
+
+            E e = new E();
+            B b = new E();
+
+            Console.WriteLine();
+            e.fun_v1();     // E_V1
+            e.fun_v2();     // E_V2
+            e.fun_nv();     // E_NV
+
+            Console.WriteLine();
+            b.fun_v1();     // E_V1
+            b.fun_v2();     // D_V2
+            b.fun_nv();     // B_NV
+
+
+
         }
 
         public static void Finalizers()
