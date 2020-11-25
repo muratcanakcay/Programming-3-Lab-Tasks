@@ -11,19 +11,17 @@ namespace Lab8
 
         public long Numerator
         {
-            get
-            { return numerator; }
+            get => numerator; 
             set
             {
                 numerator = value;
-                simplify();
+                if (denominator != 0) simplify();
             }
         }
 
         public long Denominator
         {
-            get
-            { return denominator; }
+            get => denominator; 
             set
             {
                 if (value <= 0) throw new ArgumentException("Denominator cannot be 0 or negative");
@@ -32,21 +30,12 @@ namespace Lab8
             }
         }
 
-        public Fraction(long n, long d)
-        {
-            if (d <= 0) throw new ArgumentException("Denominator cannot be 0 or negative");
-
-            numerator = n;
-            denominator = d;
-            simplify();
+        public Fraction(long n, long d = 1) : this()
+        {   
+            Numerator = n;
+            Denominator = d;            
         }
-
-        public Fraction(long n)
-        {
-            numerator = n;
-            denominator = 1;
-        }        
-
+        
         public override string ToString()
         {
             var whole = numerator / denominator;
@@ -76,69 +65,48 @@ namespace Lab8
         {
             while (d != 0)
             {
-                var oldd = d;
+                long x = d;
                 d = n % d;
-                n = oldd;
+                n = x;
             }
             return n;
         }
 
         void simplify()
         {
-            long gcd = GetGCD(numerator, denominator);            
+            long gcd = Math.Abs(GetGCD(Numerator, Denominator));
             numerator /= gcd;
-            denominator /= gcd;
-            if (denominator < 0)
-            {
-                numerator *= -1;
-                denominator *= -1;
-            }
+            denominator /= gcd;            
         }
 
-        public string Reciprocal()
+        public Fraction Reciprocal()
         {
-            long temp = denominator;
-
-            denominator = numerator;
-            numerator = temp;
-            if (denominator < 0)
+            if (Numerator < 0)
             {
-                numerator = -numerator;
-                denominator *= -1;
+                return new Fraction(-Denominator, -Numerator);
             }
 
-            simplify();
-
-            return this.ToString();
+            return new Fraction(Denominator, Numerator);
         }
 
         //- implicit from long type to Fraction
         //- explicit from Fraction to long
         //- explicit from Fraction to double
 
-        public static implicit operator Fraction(long l)
-        {
-            return new Fraction(l);
-        }
+        public static implicit operator Fraction(long l) => new Fraction(l);
 
-        public static explicit operator long(Fraction f)
-        {
-            return f.Numerator / f.Denominator;
-        }
+        public static explicit operator long(Fraction f) => f.Numerator / f.Denominator;
 
-        public static explicit operator double(Fraction f)
-        {
-            return (double)f.Numerator / (double)f.Denominator;
-        }
-
+        public static explicit operator double(Fraction f) => (double)f.Numerator / (double)f.Denominator;
+        
         //+ - * / and unary -
 
         public static Fraction operator +(Fraction f1, Fraction f2)
         {
             Fraction ret = new Fraction();
 
-            ret.numerator = (f1.numerator * f2.denominator + f1.denominator * f2.numerator);
-            ret.denominator = (f1.denominator * f2.denominator);
+            ret.numerator = f1.denominator == f2.denominator ? f1.numerator + f2.numerator : f1.numerator * f2.denominator + f1.denominator * f2.numerator;
+            ret.denominator = f1.denominator == f2.denominator ? f1.denominator : f1.denominator * f2.denominator;
 
             ret.simplify();
 
@@ -149,8 +117,8 @@ namespace Lab8
         {
             Fraction ret = new Fraction();
 
-            ret.numerator = (f1.numerator * f2.denominator - f1.denominator * f2.numerator);
-            ret.denominator = (f1.denominator * f2.denominator);
+            ret.numerator = f1.denominator == f2.denominator ? f1.numerator + f2.numerator : f1.numerator * f2.denominator - f1.denominator * f2.numerator;
+            ret.denominator = f1.denominator == f2.denominator ? f1.denominator : f1.denominator * f2.denominator; 
 
             ret.simplify();
 
@@ -173,8 +141,11 @@ namespace Lab8
         {
             Fraction ret = new Fraction();
 
-            ret.numerator = (f1.numerator * f2.numerator);
-            ret.denominator = (f1.denominator * f2.denominator);
+            long gcd1 = GetGCD(f1.numerator, f2.denominator);
+            long gcd2 = GetGCD(f2.numerator, f1.denominator);
+
+            ret.numerator = ((f1.numerator / gcd1) * (f2.numerator/gcd2));
+            ret.denominator = ((f1.denominator / gcd2) * (f2.denominator / gcd1));
 
             ret.simplify();
 
@@ -184,9 +155,9 @@ namespace Lab8
         public static Fraction operator /(Fraction f1, Fraction f2)
         {
             Fraction ret = new Fraction();
-
-            ret.numerator = (f1.numerator * f2.denominator);
-            ret.denominator = (f1.denominator * f2.numerator);
+                        
+            ret.numerator = f1.denominator == f2.denominator ? f1.numerator : (f1.numerator * f2.denominator);
+            ret.denominator = f1.denominator == f2.denominator ? f2.numerator : (f1.denominator * f2.numerator);
 
             ret.simplify();
 
@@ -232,7 +203,7 @@ namespace Lab8
 
         public override int GetHashCode()
         {
-            return denominator.GetHashCode() ^ numerator.GetHashCode();
+            return Denominator.GetHashCode() ^ Numerator.GetHashCode();
         }
 
     }
