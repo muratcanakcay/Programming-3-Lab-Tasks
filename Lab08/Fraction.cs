@@ -105,8 +105,8 @@ namespace Lab8
         {
             Fraction ret = new Fraction();
 
-            ret.numerator = f1.denominator == f2.denominator ? f1.numerator + f2.numerator : f1.numerator * f2.denominator + f1.denominator * f2.numerator;
-            ret.denominator = f1.denominator == f2.denominator ? f1.denominator : f1.denominator * f2.denominator;
+            ret.numerator = (f1.denominator == f2.denominator) ? (f1.numerator + f2.numerator) : ((f1.numerator * f2.denominator) + (f1.denominator * f2.numerator));
+            ret.denominator = (f1.denominator == f2.denominator) ? (f1.denominator) : (f1.denominator * f2.denominator);
 
             ret.simplify();
 
@@ -117,8 +117,8 @@ namespace Lab8
         {
             Fraction ret = new Fraction();
 
-            ret.numerator = f1.denominator == f2.denominator ? f1.numerator + f2.numerator : f1.numerator * f2.denominator - f1.denominator * f2.numerator;
-            ret.denominator = f1.denominator == f2.denominator ? f1.denominator : f1.denominator * f2.denominator; 
+            ret.numerator = (f1.denominator == f2.denominator) ? (f1.numerator + f2.numerator) : ((f1.numerator * f2.denominator) - (f1.denominator * f2.numerator));
+            ret.denominator = (f1.denominator == f2.denominator) ? (f1.denominator) : (f1.denominator * f2.denominator); 
 
             ret.simplify();
 
@@ -155,12 +155,12 @@ namespace Lab8
         public static Fraction operator /(Fraction f1, Fraction f2)
         {
             Fraction ret = new Fraction();
-                        
-            ret.numerator = f1.denominator == f2.denominator ? f1.numerator : (f1.numerator * f2.denominator);
-            ret.denominator = f1.denominator == f2.denominator ? f2.numerator : (f1.denominator * f2.numerator);
+
+            ret.Numerator = f1.denominator == f2.denominator ? f1.numerator : (f1.numerator * f2.denominator);
+            ret.Denominator = f1.denominator == f2.denominator ? f2.numerator : (f1.denominator * f2.numerator);
 
             ret.simplify();
-
+            
             return ret;
         }
 

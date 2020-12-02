@@ -15,11 +15,11 @@ namespace EN_Lab_09
 
         public IEnumerable Decorate(IEnumerable enumerable)
         {
-            int i = 0;
+            int sum = 0;
             foreach (int elem in enumerable)
             {
-                i += elem;
-                yield return i;
+                sum += elem;
+                yield return sum;
             }
         }
 
