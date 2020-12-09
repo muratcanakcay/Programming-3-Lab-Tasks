@@ -29,9 +29,9 @@ namespace Lab09_EN
 
     // TODO: Implement CircularBuffer extender here
 
-    public static class CircularBufferExtension
+    public static class CircularBufferExtension 
     {
-        public static CircularBuffer<T> Clone<T>(this CircularBuffer<T> cb) where T:IComparable<T>
+        public static CircularBuffer<T> Clone<T>(this CircularBuffer<T> cb) where T : IComparable
         {
             var clone = new CircularBuffer<T>(cb.Size);  
             

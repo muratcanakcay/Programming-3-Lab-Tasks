@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Lab09_EN
 {
-    public class CircularBuffer<T> : IBuffer<T>, IEnumerable where T : IComparable<T>
+    public class CircularBuffer<T> : IBuffer<T>, IEnumerable where T : IComparable
     {
         // TODO: Implement here
 
