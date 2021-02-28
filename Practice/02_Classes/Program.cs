@@ -137,6 +137,9 @@ namespace Classes
             DD dFF = new FF();
             dFF.fun(); // DOES NOT override and uses DD.fun() since its class is BB and -new virtual- not -override- was used in EE.
             Console.WriteLine();
+
+            // AAA aa = new AAA(); // error - cannot create instance of abstract class
+            AAA aa = new BBB(); // this is OK. can assign derived class to base abstract class type variable
         }
     }
 }
