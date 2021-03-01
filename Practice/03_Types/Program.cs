@@ -24,12 +24,14 @@ namespace _03_Types
 
             // arrays
             // they are objects of types derived from System.Array abstract class
+            // size is fixed!
 
             int[] a1 = new int[3]; // 1 dimensional array declared
             int[] a11 = new int[] { 1, 2, 3 }; // no need for 3 since it's initialized
-            Console.WriteLine(a1[0]);
+            int[] a111 = { 1, 2, 3 }; // actually new int[] can also be ommitted 
+            
             int[,] a21; // 2 dimensinal array declared
-            a21 = new int[1, 2]; // 1 x 2 array is defined
+            a21 = new int[1, 2]; // 1 x 2 array is defined but not initialized
 
             // Array declarations examples without initialization
             int[] tab1; // single-dimensional array
@@ -61,6 +63,9 @@ namespace _03_Types
             // then each element is again initialized seperately:
             tab41[2, 1][3] = new int[7, 8, 9];
 
+            // simpler to use var
+            var tab411 = new int[3, 4][][,,];
+
             // these give error because they elements cannot be initialized at bulk like this:            
             // int[][] tab31a = new int[5][4]; // error
             // int[,][][,,] tab41a = new int[3, 4][5][6, 7, 8]; // error
@@ -82,11 +87,40 @@ namespace _03_Types
             int[,][][,,] tab42 = { { new int[2][,,], new int[4][,,] } , { new int[3][,,], new int[5][,,] } };
             // create 2-element array of arrays
             
+
             // int[][] tab52 = { { 1, 2 }, { 3, 4 } };
             // error - nested array must be created
             // using new operator
             // (because tab5 is array of arrays)
 
+            // array of reference type can contain elements of different types (e.g. those derived from the reference type)
+            object[] tab = { 1, 2.5, "text", null, 1u, 2L };
+
+            // Array declarations examples with implicit elements types
+            // single-dimensional array
+            var tab1x = new int[5]; // int[] tab1x = new int[5];
+                                   // two-dimensional array
+            var tab2x = new int[4, 2]; // int[,] tab2x = new int[4,2];
+                                      // arrays of arrays
+            var tab3x = new int[5][]; // int[][] tab3x = new int[5][];
+                                     // declarations with initialization
+                                     // - elements types can be omitted too!
+            var tab4x = new[] { 1, 2, 3 }; //int[] tab4x = new int [] { 1, 2, 3 };
+                                    // elements must be of the same type
+
+            var tab5x = new[] { new[] { 1, 2 }, new[] { 3, 4 } };
+            //int[][] tab5x = new int[2][] { new int[2] { 1, 2 }, new int[2] { 3, 4 } };
+
+            var tab1xx = new[] { 1, 2, 3, 4, 5 };
+            var tab2xx = new[] { 1, 2, 3, 4, 5 };
+            var t1xx = new int[5];
+            var t2xx = new int[5];
+
+            t1xx = tab1xx; // references tab1xx and t1xx refer to
+                           // the same array
+            t2xx = tab2xx[..]; // references tab2xx and t2xx refer to two
+                           // separate arrays with the same elements,
+                           // t2xx is a shallow copy of tab2xx
 
         }
     }
