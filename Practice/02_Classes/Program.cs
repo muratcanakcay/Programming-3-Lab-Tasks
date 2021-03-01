@@ -98,6 +98,64 @@ namespace Classes
         }
     }
 
+    // c-tors
+
+    public class A4 // can have both abstract and non-abstract methods
+    {
+        public int a;
+
+        public A4(int a)
+        {
+            this.a = a;
+        }        
+    }
+
+    public class B4 : A4 
+    {
+        public B4(int a, int b) : base(a) // base keyword invokes base class constructor first
+        {
+            this.b = b;
+        }
+
+        public B4(int a, int b, int c) : this(a, b)  // this keyword invokes constructor matching the types
+        {
+            Console.WriteLine(c);
+        }
+
+        public int b;
+       
+    }
+
+    // factoy method 
+
+    public class A5 // can have both abstract and non-abstract methods
+    {
+        public int a;
+
+        public A5(int a)
+        {
+            this.a = a;
+        }
+
+    }
+
+    public class B5 : A5
+    {
+        private B5(int a, int b) : base(a) // c-tor private --> object of B5 type cannot be created 
+        {
+            this.b = b;
+        }        
+
+        public int b;
+
+        public static B5 Factory(int a, int b)   // factory method used to create object of type B5
+        {
+            return new B5(a, b);
+        }
+
+    }
+
+
     // -----------
 
     class Program
@@ -140,6 +198,9 @@ namespace Classes
 
             // AAA aa = new AAA(); // error - cannot create instance of abstract class
             AAA aa = new BBB(); // this is OK. can assign derived class to base abstract class type variable
+
+            // B5 new_B5 = new B5(1, 2); // error - c-tor is private
+            B5 factory_output = B5.Factory(1, 2); // factory method is used to create object of type B5
         }
     }
 }
