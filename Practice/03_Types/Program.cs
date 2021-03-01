@@ -119,8 +119,25 @@ namespace _03_Types
             t1xx = tab1xx; // references tab1xx and t1xx refer to
                            // the same array
             t2xx = tab2xx[..]; // references tab2xx and t2xx refer to two
-                           // separate arrays with the same elements,
-                           // t2xx is a shallow copy of tab2xx
+                               // separate arrays with the same elements,
+                               // t2xx is a shallow copy of tab2xx
+
+
+
+            int[,] a; // it will be one object
+            a = new int[5, 5];
+            for (int i = 0; i < a.GetLength(0); ++i)  // GetLength() method returns the length of the given dimension
+                for (int j = 0; j < a.GetLength(1); ++j)
+                    a[i, j] = i + j;
+            
+            int[][] b; // it will be many objects
+            b = new int[5][];
+            for (int i = 0; i < b.Length; ++i)   // Length property gives the length of the array
+            {
+                b[i] = new int[5];
+                for (int j = 0; j < b[i].Length; ++j)
+                    b[i][j] = i + j;
+            }
 
         }
     }
