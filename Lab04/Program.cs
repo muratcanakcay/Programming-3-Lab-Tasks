@@ -46,6 +46,12 @@ namespace Lab04_eng
             Cone cone4 = new Cone(c4, 10);
             Console.WriteLine(cylinder4.PrintD3Shape());                        // Cylinder with height= 10 and base: Circle(r=10)
             Console.WriteLine(cone4.PrintD3Shape());                            // Cone with height= 10 and base: Circle(r=10)
+            c4.Radius = 15;
+            Console.WriteLine();
+            Console.WriteLine(cylinder4.PrintD3Shape());                        // Cylinder with height= 10 and base: Circle(r=10)
+            Console.WriteLine(cone4.PrintD3Shape());                            // Cone with height= 10 and base: Circle(r=10)
+
+            PrintLine();
 
             D3Shape d4Cylinder = cylinder4;
             D3Shape d4Cone = cone4;
