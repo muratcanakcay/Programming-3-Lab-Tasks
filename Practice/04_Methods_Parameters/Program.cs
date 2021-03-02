@@ -20,12 +20,12 @@ namespace Methods_Parameters
 
 
             Console.WriteLine($"a={a}, b={b}, c1={c1}, c2={c2}, d={d}, e={e}");
-            foreach(var x in tab) Console.Write($"{x} ");
+            foreach (var x in tab) Console.Write($"{x} ");
         }
     }
 
     class Program
-    { 
+    {
         static void Main(string[] args)
         {
             int a = 0; // value - modifications in method do not affect original value
@@ -38,9 +38,9 @@ namespace Methods_Parameters
                                    // values of array can be modified in method
                                    // since there's an optional paramater e before params t we must name it with t:t in method invocation 
 
-            Test.testing(a, ref b, out c1, out int c2, in d, tab:t);
+            Test.testing(a, ref b, out c1, out int c2, in d, tab: t);
 
-            
+
         }
     }
 }
